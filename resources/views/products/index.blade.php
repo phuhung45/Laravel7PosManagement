@@ -65,12 +65,12 @@
                                 @method('put')
                                 <div class="form-group">
                                     <label for="">Tên sản phẩm</label>
-                                    <input type="text" name="name" id="" value="{{$product->product_name}}" class="form-control">
+                                    <input type="text" name="product_name" id="" value="{{$product->product_name}}" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Thương hiệu</label>
-                                    <input type="text" name="name" id="" value="{{$product->brand}}" class="form-control">
+                                    <input type="text" name="brand" id="" value="{{$product->brand}}" class="form-control">
                                 </div>
 
                                 <div class="form-group">

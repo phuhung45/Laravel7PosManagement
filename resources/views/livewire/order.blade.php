@@ -5,23 +5,27 @@
 
                 <div class="card-header"><h4 style="float:left">Danh sách đơn hàng</h4><a href="#" style="float:right" class="btn btn-dark" data-toggle="modal" data-target="#addUser"><i class="fa fa-plus"></i> Thêm sản phẩm mới</a>
                 </div>
-
+                <div class="my-2">
+                    <form wire:submit.prevent="InsertoCart">
+                    <input type="text" name="" wire:model="product_code" id="" class="form-control" placeholder="Nhập mã sản phẩm">
+                    </form>
+                    </div>
                 <form action="{{ route('orders.store') }}" method="post">
                     @csrf
-                    <div class="card-body">
 
-                    <div class="my-2">
-                    <form wire:submit.prevent="InsertoCard">
-                    <input type="text" name="" wire:model="product_code" id="" class="form-control" placeholder="Nhập mã sản phẩm">
-                    </div>
-                    <div class="alert alert-success">{{ $message }}</div>
+
+            <div class="card-body">
+
                     @if (session()->has('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
+                    <div class="alert alert-success">{{ $message }}</div>
                     @elseif(session()->has('info'))
-                    <div class="alert alert-info">{{ session('info') }}</div>
+                    <div class="alert alert-success">{{ session('success') }}</div>
                     @elseif(session()->has('error'))
+                    <div class="alert alert-info">{{ session('info') }}</div>
+                    @elseif(session()->has('info'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
                     @endif
+                    </form>
                         <table class="table table-bordered table-left">
                             <thead>
                                 <tr>
@@ -36,7 +40,10 @@
                                 </tr>
                             </thead>
                             <tbody class="addMoreProduct">
-                                @foreach ($productInCart as $key=>$cart)
+                            <form action="{{ route('orders.store') }}" method="POST">
+                            @csrf
+
+                                @foreach ($productInCart as $key=> $cart)
                                 <tr>
                                     <td class="no">{{ $key +1 }}</td>
                                     <td width ="30%">
@@ -50,35 +57,32 @@
                                                 <button wire:click.prevent="DecrementQty({{ $cart->id }})" class="btn-sm btn-danger">-</button>
                                             </div>
                                             <div class="col-md-1">
-                                                <label for="">{{ $cart->product_qty }}</label>
+                                                <label for="" >{{ $cart->product_qty }}</label>
                                             </div>
                                             <div class="col-md-2">
                                                 <button wire:click.prevent="IncrementQty({{ $cart->id }})" class="btn-sm btn-success">+</button>
                                             </div>
                                         </div>
                                     </td>
-
                                     <td>
                                         <input type="number" class="form-control" value="{{ $cart->product->price }}">
                                     </td>
-
                                     <td>
                                         <input type="number" class="form-control">
                                     </td>
-
                                     <td>
-                                        <input type="number" class="form-control" value="{{ $cart->product_qty *  $cart->product->price }}">
+                                        <input type="number" class="form-control" value="{{ $cart->product_qty * $cart->product->price }}">
                                     </td>
                                     <td><a href="#" class="btn btn-sm btn-danger delete rounded-circle"><i class="fa fa-times" wire:click="removeProduct({{ $cart->id }})"></i></a></td>
                                 </tr>
 
                                 @endforeach
-
+                                </form>
                             </tbody>
                         </table>
-                        </form>
+
                     </div>
-                </form>
+
                 </div>
             </div>
 
@@ -86,12 +90,12 @@
             <div class="card">
             <form action="{{ route('orders.store') }}" method="POST">
                 @csrf
-                                @foreach ($productInCart as $key=>$cart)
-                                        <input type="hidden" name="product_id[]" value="{{ $cart->product->id}}">
-                                                <input type="hidden" name="quantity[]" value="{{ $cart->product_qty }}" >
-                                        <input type="hidden" name="price[]" class="form-control price" value="{{ $cart->product->price}}">
+                                @foreach ($productInCart as $key=> $cart)
+                                        <input type="hidden" name="product_id[]" class="form-control" value="{{ $cart->product->id }}">
+                                        <input type="hidden" name="quantity[]" value="{{ $cart->product_qty }}">
+                                        <input type="hidden" name="price[]" class="form-control price" value="{{ $cart->product->price }}">
                                         <input type="hidden" name="discount[]" class="form-control discount">
-                                        <input type="hidden" name="total_amount[]" class="form-control total_amount"value="{{ $cart->product_qty * $cart->product->price}}">
+                                        <input type="hidden" name="total_amount[]" class="form-control total_amount" value="{{ $cart->product_qty * $cart->product->price }}">
                                 @endforeach
 
                 <div class="card-header"><h4> Tổng tiền <b class="total"> {{ $productInCart->sum('product_price') }}</b></h4>
@@ -156,6 +160,7 @@
                                 <button class="btn-danger btn-lg btn-block mt-2">Tính tiền</button>
                             </td>
                         </div>
+
                     </div>
                 </form>
         </div>
@@ -210,6 +215,7 @@
             <div class="modal-footer">
                 <button class="btn btn-primary btn-block">Thêm người dùng</button>
             </div>
+            </form>
       </div>
     </div>
   </div>

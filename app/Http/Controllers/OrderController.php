@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -50,8 +54,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        dump($request->all());
-        // return $request->all();
+        // dump($request->all());
+        return $request->all();
         DB::transaction(function () use ($request){
             $orders = new Order;
             $orders->name = $request->customer_name;
@@ -80,6 +84,7 @@ class OrderController extends Controller
         $transaction->transac_amount = $order_details->amount;
         $transaction->transac_date = date('Y-m-d');
         $transaction->save();
+
         $products = Product::all();
         $order_details = Order_Detail::where('order_id', $order_id)->get();
         $orderedBy = Order::where('id', $order_id)->get();
@@ -89,6 +94,7 @@ class OrderController extends Controller
             'order_details' => $order_details,
             'customer_orders' => $orderedBy
         ]);
+
     });
 
             return back()->with("Thêm hóa đơn thất bại. kiểm tra đầu vào của bạn !");

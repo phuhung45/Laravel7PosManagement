@@ -26,6 +26,7 @@ class Order extends Component
     public function __construct()
     {
         $this->productInCart = Cart::orderBy('id',"DESC")->get();
+        // dump( $this->productInCart );
         // dump($this->productInCart);die;
     }
     public $orders, $products = [], $product_code, $message = '', $productInCart;
@@ -38,7 +39,7 @@ class Order extends Component
         $this->productInCart = Cart::all();
     }
 
-    public function InsertoCard()
+    public function InsertoCart()
     {
         $countProduct = Product::where('id', $this->product_code)->first();
 
@@ -58,7 +59,6 @@ class Order extends Component
         $add_to_cart->product_price = $countProduct->price;
         $add_to_cart->user_id = auth()->user()->id;
         $add_to_cart->save();
-
         $this->productInCart->prepend($add_to_cart);
         $this->product_code = '';
         return $this->message = 'Thêm sản phẩm thành công';
@@ -101,7 +101,7 @@ class Order extends Component
     {
         if ($this->pay_money != '') {
         $totalAmount = $this->pay_money - $this->productInCart->sum('product_price');
-        var_dump($this->totalAmount);
+        // var_dump($this->totalAmount);
         $this->balance = $totalAmount;
         }
         return view('Livewire.order');
