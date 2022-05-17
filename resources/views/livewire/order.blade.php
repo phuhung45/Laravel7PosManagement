@@ -7,14 +7,13 @@
                 </div>
                 <div class="my-2">
                     <form wire:submit.prevent="InsertoCart">
-                    <input type="text" name="" wire:model="product_code" id="" class="form-control" placeholder="Nhập mã sản phẩm">
+                    @csrf
+                    <input type="text" name="" wire:model="product_name" id="" class="form-control" placeholder="Nhập mã sản phẩm">
                     </form>
                     </div>
                 <form action="{{ route('orders.store') }}" method="post">
                     @csrf
-
-
-            <div class="card-body">
+                <div class="card-body">
 
                     @if (session()->has('success'))
                     <div class="alert alert-success">{{ $message }}</div>
@@ -25,7 +24,7 @@
                     @elseif(session()->has('info'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
                     @endif
-                    </form>
+                </form>
                         <table class="table table-bordered table-left">
                             <thead>
                                 <tr>

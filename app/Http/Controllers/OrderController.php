@@ -55,7 +55,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         // dump($request->all());
-        return $request->all();
+        // return $request->all();
         DB::transaction(function () use ($request){
             $orders = new Order;
             $orders->name = $request->customer_name;
@@ -64,16 +64,18 @@ class OrderController extends Controller
             $order_id = $orders->id;
 
         // order detail modal
-        for ($product_id = 0; $product_id < count($request->product_id); $product_id++) {
+        for ($product_id = 0; $product_id < sizeof($request->product_id); $product_id++) {
+            // dd($request);
         $order_details = new Order_Detail;
         $order_details->order_id = $order_id;
         $order_details->product_id = $request->product_id[$product_id];
-        $order_details->unitprice = $request->price[$product_id];
         $order_details->quantity = $request->quantity[$product_id];
+        $order_details->unitprice = $request->price[$product_id];
         $order_details->discount = $request->discount[$product_id];
         $order_details->amount = $request->total_amount[$product_id];
         $order_details->save();
         }
+        // dd($order_details);
         // tranactions Modal
         $transaction = new Transaction();
         $transaction->order_id = $order_id;
@@ -84,6 +86,9 @@ class OrderController extends Controller
         $transaction->transac_amount = $order_details->amount;
         $transaction->transac_date = date('Y-m-d');
         $transaction->save();
+
+        Cart::truncate();
+        // dd($transaction);
 
         $products = Product::all();
         $order_details = Order_Detail::where('order_id', $order_id)->get();

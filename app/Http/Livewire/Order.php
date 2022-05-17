@@ -29,7 +29,7 @@ class Order extends Component
         // dump( $this->productInCart );
         // dump($this->productInCart);die;
     }
-    public $orders, $products = [], $product_code, $message = '', $productInCart;
+    public $orders, $products = [], $product_name, $message = '', $productInCart;
 
     public $pay_money = '', $balance = '';
 
@@ -41,13 +41,13 @@ class Order extends Component
 
     public function InsertoCart()
     {
-        $countProduct = Product::where('id', $this->product_code)->first();
+        $countProduct = Product::where('product_name', $this->product_name)->first();
 
         if (!$countProduct) {
             return $this->message = 'không tìm thấy sản phẩm';
         }
 
-        $countCartProduct = Cart::where('product_id', $this->product_code)->count();
+        $countCartProduct = Cart::where('product_id', $this->product_name)->count();
 
         if ($countCartProduct > 0) {
             return $this->message = 'sản phẩm ' . $countProduct->product_name . ' đã có trong giỏ hàng, hãy kiểm tra lại số lượng ' ;
@@ -60,7 +60,7 @@ class Order extends Component
         $add_to_cart->user_id = auth()->user()->id;
         $add_to_cart->save();
         $this->productInCart->prepend($add_to_cart);
-        $this->product_code = '';
+        $this->product_name = '';
         return $this->message = 'Thêm sản phẩm thành công';
         // dd($countProduct);
     }
