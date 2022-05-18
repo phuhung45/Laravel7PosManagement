@@ -153,7 +153,7 @@
         myReceipt.document.title = "Print Receipt";
         myReceipt.focus();
         setTimeout(() => {
-            myReceipt.Close();
+        myReceipt.close();
         }, 8000);
     }
 
