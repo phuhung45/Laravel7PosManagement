@@ -13,8 +13,8 @@ class Products extends Component
     }
 
     public function ProductsDetails($product_id){
-       $count = $this->products_details = Product::find($product_id);
-       dd($count);
+          $this->products_details = Product::where('id', $product_id)->get();
+    //    dd($count);
     }
 
     public function render()
