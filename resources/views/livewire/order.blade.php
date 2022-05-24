@@ -33,7 +33,7 @@
                                     <th>Số lượng</th>
                                     <!-- <th>Số điện thoại</th> -->
                                     <th>Giá</th>
-                                    <th>Giảm giá (%)</th>
+                                    {{-- <th>Giảm giá (%)</th> --}}
                                     <th colspan="6">Thành tiền</th>
                                     <!-- <th><a href="#" class="btn btn-sm btn-success rounded-circle add_more"><i class="fa fa-plus-circle"></i></a></th> -->
                                 </tr>
@@ -66,9 +66,9 @@
                                     <td>
                                         <input type="number" class="form-control" value="{{ $cart->product->price }}">
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <input type="number" class="form-control">
-                                    </td>
+                                    </td> --}}
                                     <td>
                                         <input type="number" class="form-control" value="{{ $cart->product_qty * $cart->product->price }}">
                                     </td>
