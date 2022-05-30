@@ -8,21 +8,15 @@
                             </button>
                         </div>
                         <div class="modal-body">
-
+                                <form method="post" action="{{ route('products.destroy', $product->id) }}">
+                                    @csrf
+                                    @method('delete')
                                 <p>Bạn chắc chắn muốn xóa sản phẩm {{ $product->product_name }} ?</p>
                                 <div class="modal-footer">
                                     <button class="btn btn-info" data-dismiss="modal">Hủy</button>
-                                    <form method="post" action="{{ route('products.destroy', ['product' => $product->id]) }}">
-                                    @csrf
-                                    @method('delete')
 
                                         <!-- <button type="submit" class="btn btn-danger">Xóa</button> -->
-                                    </form>
-
-                                    <form method="post" action="{{ route('products.destroy', ['product' => $product->id]) }}">
-                                        @csrf
-                                        @method('delete')
-                                            <button type="submit" class="btn btn-danger">Xoá</button>
+                                    <button type="submit" class="btn btn-danger">Xoá</button>
                                         </div>
                                     </form>
                                 </div>

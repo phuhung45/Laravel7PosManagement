@@ -30,7 +30,7 @@ Route::resource('/companies', 'CompanyController');
 Route::resource('/transactions', 'TransactionController');
 Route::get('barcode', 'ProductController@GetProductBarcodes')->name('products.barcode');
 
-
+Route::resource('/sections', 'SectionController');
 
 
 

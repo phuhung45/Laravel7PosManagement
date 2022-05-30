@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label for="">ID sản phẩm</label>
-            <img src="{{ asset('product/images/' .$product->product_image)}}" width="70" cursor: pointer; alt="">
+            <img data-toggle="modal" data-target="#productPreview{{ $product->id }}" src="{{ asset('product/images/' .$product->product_image)}}" width="70" style="cursor: pointer;" alt="">
             <input type="text" class="form-control" value="{{ $product->id }}" readonly>
         </div>
     </div>
@@ -58,14 +58,20 @@
             <h5>{{ $product->product_code }}</h5>
         </div>
     </div>
+    @include('products.product_preview')
 
 @empty
+
 
 @endforelse
 </div>
 
 <style>
     input:read-only{
+        background: #fff !important;
+    }
+
+    textarea:read-only{
         background: #fff !important;
     }
 </style>

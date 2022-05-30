@@ -17,6 +17,10 @@
         </li>
 
         <li>
+            <a href="{{ route('sections.index') }}"> <i class="fa fa-truck fa-list"></i>Danh mục sản phẩm</a>
+        </li>
+
+        <li>
             <a href="">Trang chủ</a>
         </li>
 
