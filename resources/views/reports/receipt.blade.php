@@ -12,7 +12,7 @@
         <div class="info">
             <h2>Liên hệ chúng tôi</h2>
             <p>Địa chỉ :</p>
-            <p>Email :</p>
+            <p>Email : </p>
             <p>Điện thoại :</p>
         </div>
     </div>
@@ -28,11 +28,11 @@
                     <td class="Rate"><h2>Tổng tiền</h2></td>
                 </tr>
 
-                @foreach ($order_receipt as $receipt)
+                @foreach ($order_receipt as $key => $receipt)
 
                 <tr class="service">
                     <td class="tableitem"><p class="itemtext">{{ $receipt->product->product_name }}</p></td>
-                    <td class="tableitem"><p class="itemtext">{{ $receipt->quantity }}</p></td>
+                    <td class="tableitem"><p class="itemtext">{{ $receipt->order_detail->quantity }}</p></td>
                     <td class="tableitem"><p class="itemtext">{{ number_format($receipt->unitprice, 2) }}</p></td>
                     <td class="tableitem"><p class="itemtext">{{ $receipt->discount ? '' : '0' }}</p></td>
                     <td class="tableitem"><p class="itemtext">{{ number_format($receipt->amount, 2) }}</p></td>

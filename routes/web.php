@@ -30,9 +30,8 @@ Route::resource('/companies', 'CompanyController');
 Route::resource('/transactions', 'TransactionController');
 Route::get('barcode', 'ProductController@GetProductBarcodes')->name('products.barcode');
 
-Route::resource('/sections', 'SectionController');
+Route::resource('/sections', 'SectionController'); // sections.index
+Route::resource('/categories', 'CategoryController'); // categories.index
+Route::resource('/subcategories', 'SubCategoryController'); // subcategories.index
 
-
-
-
-
+Route::delete('/delete/{id}', 'product@destroy')->name('delete');

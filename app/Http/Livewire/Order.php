@@ -32,6 +32,7 @@ class Order extends Component
     public $orders, $products = [], $product_name, $message = '', $productInCart;
 
     public $pay_money = '', $balance = '';
+    public $cartQty = '', $cartPrice = '';
 
     public function count()
     {
@@ -99,13 +100,13 @@ class Order extends Component
 
     public function render()
     {
+        $order = Cart::all();
         if ($this->pay_money != '') {
         $totalAmount = $this->pay_money - $this->productInCart->sum('product_price');
         // var_dump($this->totalAmount);
         $this->balance = $totalAmount;
         }
-        return view('Livewire.order');
+        return view('Livewire.order',compact('order'));
     }
 }
-
 ?>

@@ -31,7 +31,7 @@
                                     <td>
                                         <div class="btn-group">
                                             <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#editproduct{{ $product->id }}"><i class="fa fa-edit"></i>Edit</a>
-                                            <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteproduct{{ $product->id }}"><i class="fa fa-trash"></i>Delete</a>
+                                            <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteProduct{{ $product->id }}"><i class="fa fa-trash"></i>Delete</a>
                                         </div>
                                     </td>
                                 </tr>

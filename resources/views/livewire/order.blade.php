@@ -41,13 +41,12 @@
                             <tbody class="addMoreProduct">
                             <form action="{{ route('orders.store') }}" method="POST">
                             @csrf
-
                                 @foreach ($productInCart as $key=> $cart)
                                 <tr>
                                     <td class="no">{{ $key +1 }}</td>
                                     <td width ="30%">
                                         <input type="text" class="form-control"
-                                        value="{{ $cart->product->product_name }}">
+                                        value="{{ $cart->product->product_name ?? 'None' }}">
                                     </td>
 
                                     <td width="15%">
@@ -64,7 +63,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" value="{{ $cart->product->price }}">
+                                        <input type="number" class="form-control" value="{{ $cart->product->price ?? 'None' }}">
                                     </td>
                                     {{-- <td>
                                         <input type="number" class="form-control">
@@ -89,14 +88,17 @@
             <div class="card">
             <form action="{{ route('orders.store') }}" method="POST">
                 @csrf
-                                @foreach ($productInCart as $key=> $cart)
-                                        <input type="hidden" name="product_id[]" class="form-control" value="{{ $cart->product->id }}">
-                                        <input type="hidden" name="quantity[]" value="{{ $cart->product_qty }}">
-                                        <input type="hidden" name="price[]" class="form-control price" value="{{ $cart->product->price }}">
-                                        <input type="hidden" name="discount[]" class="form-control discount">
-                                        <input type="hidden" name="total_amount[]" class="form-control total_amount" value="{{ $cart->product_qty * $cart->product->price }}">
-                                @endforeach
-
+                    @foreach ($productInCart as $key=> $cart)
+                    <input type="hidden" name="product_id[]" class="form-control"
+                        value="{{ $cart->id }}">
+                    <input type="hidden" name="quantity[]"
+                        value="{{ $cart->product->product_qty ?? 'None' }}">
+                    <input type="hidden" name="price[]" class="form-control price"
+                        value="{{ $cart->product->price ?? 'None' }}">
+                    <input type="hidden" name="discount[]" class="form-control discount">
+                    <input type="hidden" name="total_amount[]" class="form-control total_amount"
+                        value="{{ $cart->product_qty * $cart->product->price }}">
+                    @endforeach
                 <div class="card-header"><h4> Tổng tiền <b class="total"> {{ $productInCart->sum('product_price') }}</b></h4>
                     <div class="card-body">
                         <div class="panel">
@@ -219,3 +221,4 @@
     </div>
   </div>
 </div>
+

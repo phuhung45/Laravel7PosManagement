@@ -1,4 +1,4 @@
-<div class="modal right fade" id="deleteproduct{{ $product->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal right fade" id="deleteProduct{{ $product->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                         <div class="modal-header">
@@ -8,17 +8,20 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                                <form method="post" action="{{ route('products.destroy', $product->id) }}">
+                                <form method="POST" action="{{ route('products.destroy', $product->id) }}">
                                     @csrf
-                                    @method('delete')
-                                <p>Bạn chắc chắn muốn xóa sản phẩm {{ $product->product_name }} ?</p>
-                                <div class="modal-footer">
+                                    @method('DELETE')
+                                </form>
+                                <form method="POST" action="{{ route('products.destroy', $product->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <p>Bạn chắc chắn muốn xóa sản phẩm {{ $product->product_name }} ?</p>
+                                    <div class="modal-footer">
                                     <button class="btn btn-info" data-dismiss="modal">Hủy</button>
 
-                                        <!-- <button type="submit" class="btn btn-danger">Xóa</button> -->
                                     <button type="submit" class="btn btn-danger">Xoá</button>
                                         </div>
-                                    </form>
+                                </form>
                                 </div>
 
                             </div>
