@@ -29,10 +29,11 @@
                 </tr>
 
                 @foreach ($order_receipt as $key => $receipt)
+                {{-- @dd($receipt->quantity) --}}
 
                 <tr class="service">
-                    <td class="tableitem"><p class="itemtext">{{ $receipt->product->product_name }}</p></td>
-                    <td class="tableitem"><p class="itemtext">{{ $receipt->order_detail->quantity }}</p></td>
+                    <td class="tableitem"><p class="itemtext">{{ $receipt->product_name ?? 'None'}}</p></td>
+                    <td class="tableitem"><p class="itemtext">{{ $receipt->quantity ?? 'None'}}</p></td>
                     <td class="tableitem"><p class="itemtext">{{ number_format($receipt->unitprice, 2) }}</p></td>
                     <td class="tableitem"><p class="itemtext">{{ $receipt->discount ? '' : '0' }}</p></td>
                     <td class="tableitem"><p class="itemtext">{{ number_format($receipt->amount, 2) }}</p></td>

@@ -29,8 +29,7 @@ class OrderController extends Controller
         $lastID = Order_Detail::max('order_id');
         $order_receipt = Order_Detail::where('order_id', $lastID)->get();
 
-        return view('orders.index', compact($order_receipt))->with(
-        [
+        return view('orders.index', [
             'products' => $products,
             'orders' => $orders,
             'order_receipt' => $order_receipt
@@ -66,7 +65,7 @@ class OrderController extends Controller
 
         // order detail modal
         for ($product_id = 0; $product_id < sizeof($request->product_id); $product_id++) {
-            // dd($request);
+            // dd($request->quantity);
         $order_details = new Order_Detail;
         $order_details->order_id = $order_id;
         $order_details->product_id = $request->product_id[$product_id];
@@ -76,7 +75,7 @@ class OrderController extends Controller
         $order_details->amount = $request->total_amount[$product_id];
         $order_details->save();
         }
-        // dd($order_details);
+        // dd($order_details->quantity);
         // tranactions Modal
         $transaction = new Transaction();
         $transaction->order_id = $order_id;

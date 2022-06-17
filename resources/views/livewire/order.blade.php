@@ -92,12 +92,12 @@
                     <input type="hidden" name="product_id[]" class="form-control"
                         value="{{ $cart->id }}">
                     <input type="hidden" name="quantity[]"
-                        value="{{ $cart->product->product_qty ?? 'None' }}">
+                        value="{{ $cart->product_qty }}">
                     <input type="hidden" name="price[]" class="form-control price"
                         value="{{ $cart->product->price ?? 'None' }}">
                     <input type="hidden" name="discount[]" class="form-control discount">
                     <input type="hidden" name="total_amount[]" class="form-control total_amount"
-                        value="{{ $cart->product_qty * $cart->product->price }}">
+                        value="{{ $cart->product_qty ?? 'None'* $cart->product->price ?? 'None' }}">
                     @endforeach
                 <div class="card-header"><h4> Tổng tiền <b class="total"> {{ $productInCart->sum('product_price') }}</b></h4>
                     <div class="card-body">

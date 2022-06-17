@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Transaction;
 
 class Order extends Model
 {
@@ -12,5 +13,9 @@ class Order extends Model
 
     public function order_details(){
         return $this->hasMany('App\Order_Detail');
+    }
+
+    public function tran(){
+        return $this->belongsTo(Transaction::class,'order_id');
     }
 }
